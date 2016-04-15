@@ -1,0 +1,8 @@
+---
+- name: rpi playbook
+  hosts: rpi
+  sudo: yes
+
+  tasks:
+  - name: Ensure that deluged is installed
+    apt: name=deluged state=present
