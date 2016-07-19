@@ -4,5 +4,14 @@
   sudo: yes
 
   tasks:
+  - name: Ensure that vim is installed
+    apt: name=vim state=present
+
+  - name: Ensure that screen is installed
+    apt: name=screen state=present
+
+  - name: Ensure that mc is installed
+    apt: name=mc state=present
+
   - name: Ensure that deluged is installed
     apt: name=deluged state=present
