@@ -15,3 +15,9 @@
 
   - name: Ensure that deluged is installed
     apt: name=deluged state=present
+
+  - name: Ensure that kodi is installed
+    apt: name=kodi state=present
+
+  - name: Ensure that autossh is installed
+    apt: name=autossh state=present
