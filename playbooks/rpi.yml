@@ -30,4 +30,7 @@
     apt: name=kodi state=present
 
   - name: Ensure kodi autostart is enables
-    ini_file: dest=/etc/default/kodi section= option=ENABLED value=1 state=present
+    ini_file: dest=/etc/default/kodi section= option=ENABLED value=1
+
+  - name: Ensure ssh is enabled on port 6969
+    lineinfile: dest=/etc/ssh/sshd_config regexp="^Port 6969" line='Port 6969' insertafter="^Port 22"
