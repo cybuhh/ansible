@@ -11,6 +11,12 @@
   - name: Ensure screen package is installed
     apt: name=screen state=present
 
+  - name: Ensure secure delete package is installed
+    apt: name=secure-delete state=present
+
+  - name: Ensure openvpn package is installed
+    apt: name=openvpn state=present
+
   - name: Ensure mc package is installed
     apt: name=mc state=present
 
