@@ -17,6 +17,12 @@
   - name: Ensure deluged package is installed
     apt: name=deluged state=present
 
+  - name: Ensure deluge-console package is installed
+    apt: name=deluge-console state=present
+
+  - name: Ensure deluge-gtk package is installed
+    apt: name=deluge-gtk state=present
+
   - name: Ensure autossh package is installed
     apt: name=autossh state=present
 
