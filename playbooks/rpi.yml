@@ -42,7 +42,7 @@
     apt: name=kodi state=present
 
   - name: Ensure kodi autostart is enables
-    ini_file: dest=/etc/default/kodi no_extra_spaces=yes section= option=ENABLED value=1
+    ini_file: dest=/etc/default/kodi no_extra_spaces=yes section= option=ENABLED value={{kodi_enabled}}
 
   - name: Ensure vnc4server package is installed
     apt: name=vnc4server state=present
