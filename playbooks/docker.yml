@@ -1,0 +1,11 @@
+---
+- name: docker playbook
+  hosts: rpi
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: Ensure docker package is installed
+    apt:
+       name: docker
+       state: present
