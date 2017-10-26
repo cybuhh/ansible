@@ -1,0 +1,29 @@
+---
+- name: rpi-kubernetes playbook
+  hosts: rpi
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+  - name: Ensure kubernetes repo key is imported
+    apt_key:
+      url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+      state: present
+
+  - name: Add kubernetes repo is added to apt.sources
+    apt_repository:
+      repo: 'deb https://apt.kubernetes.io/ kubernetes-xenial main'
+      filename: kubernetes
+      state: present
+      update_cache: true
+
+  - name: Ensure kubernetes admin package is installed
+    apt:
+       name: kubeadm
+       state: present
+
+  - name: Ensure kubernetes admin package is installed
+    apt:
+       name: kubectl
+       state: present
