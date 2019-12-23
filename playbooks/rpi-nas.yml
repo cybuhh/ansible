@@ -1,0 +1,53 @@
+---
+- name: rpi-nas playbook
+  hosts: rpi-nas
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: Ensure vim package is installed
+    apt:
+      name=vim
+      state=present
+
+  - name: Ensure screen package is installed
+    apt:
+      name=screen
+      state=present
+
+  - name: Ensure secure delete package is installed
+    apt:
+      name=secure-delete
+      state=present
+
+  - name: Ensure mc package is installed
+    apt:
+      name=mc
+      state=present
+
+  - name: Ensure autossh package is installed
+    apt:
+      name=autossh
+      state=present
+
+  - name: Ensure mdadm package is installed
+    apt:
+      name=mdadm
+      state=present
+
+  - name: Ensure samba package is installed
+    apt:
+      name=samba
+      state=present
+
+  - name: Ensure samba-common-bin package is installed
+    apt:
+      name=samba-common-bin
+      state=present
+
+  - name: Ensure NAS mount path exist
+    file:
+      path=/mnt/nas
+      state=directory
+      owner=pi
+      group=pi
