@@ -1,0 +1,13 @@
+---
+- name: dotfiles playbook
+  hosts: rpi-nas
+
+  tasks:
+  - name: Ensure git package is installed
+    apt:
+      name=git
+      state=present
+  - name: Ensure dotfiles repo is cloned
+    git:
+      repo: git@github.com:cybuhh/dotfiles.git
+      dest: "/home/{{ username }}/workspace/dotfiles"
