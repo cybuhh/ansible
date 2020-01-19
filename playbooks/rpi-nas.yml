@@ -51,3 +51,8 @@
       state=directory
       owner=pi
       group=pi
+
+  - name: Ensure neofetch package is installed
+    apt:
+      name=neofetch
+      state=present
