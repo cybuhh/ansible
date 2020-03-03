@@ -56,3 +56,8 @@
     apt:
       name=neofetch
       state=present
+
+  - name: Ensure mosh package is installed
+    apt:
+      name=mosh
+      state=present
