@@ -71,8 +71,8 @@
     copy:
       src: home/.config/qnapi.ini
       dest: /home/{{ username }}/.config/qnapi.ini
-      owner: pi
-      group: pi
+      owner: "{{ username }}"
+      group: "{{ username }}"
       mode: '0644'
     register: result
 
