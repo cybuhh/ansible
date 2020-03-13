@@ -61,3 +61,37 @@
     apt:
       name=mosh
       state=present
+
+  - name: Ensure qnapi package is installed
+    apt:
+      name=qnapi
+      state=present
+
+  - name: Copy qnapi configuration
+    copy:
+      src: home/.config/qnapi.ini
+      dest: /home/{{ username }}/.config/qnapi.ini
+      owner: pi
+      group: pi
+      mode: '0644'
+    register: result
+
+  - name: Ensure minidlna package is installed
+    apt:
+      name=minidlna
+      state=present
+
+  - name: Copy minidlna configuration
+    copy:
+      src: etc/minidlna.conf
+      dest: /etc/minidlna.conf
+      owner: root
+      group: root
+      mode: '0644'
+    register: result
+
+  - name: Restart minidlna service
+    service:
+      name: minidlna
+      state: restarted
+    when: result is changed
