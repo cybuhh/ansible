@@ -84,8 +84,8 @@
       state=present
 
   - name: Copy minidlna configuration
-    copy:
-      src: etc/minidlna.conf
+    template:
+      src: files/etc/minidlna.conf.j2
       dest: /etc/minidlna.conf
       owner: root
       group: root
