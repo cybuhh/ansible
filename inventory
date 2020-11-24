@@ -3,6 +3,7 @@ rpi ansible_python_interpreter=/usr/bin/python2.7
 
 #[priv]
 
-[rpi]
+[raspberrypi]
 rpi-nas
 retropie
+rpi

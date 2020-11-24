@@ -1,6 +1,8 @@
 ---
 - name: rpi-nas playbook
-  hosts: rpi-nas
+  hosts:
+  - rpi-nas
+  - rpi
   become: yes
   become_method: sudo
 
