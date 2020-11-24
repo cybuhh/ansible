@@ -46,6 +46,16 @@
     apt:
       name=samba-common-bin
       state=present
+      
+  - name: Check is Samba configuration exist
+    local_action: stat path={{ playbook_dir }}/files/etc/samba/smb.conf.{{ ansible_hostname }}
+    register: file_details
+
+  - name: Copy Samba configuration
+    copy:
+      src: "{{ playbook_dir }}/files/etc/samba/smb.conf.{{ ansible_hostname }}"
+      dest: /etc/samba/smb.conf
+    when: file_details.stat.exists
 
   - name: Ensure NAS mount path exist
     file:
