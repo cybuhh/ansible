@@ -1,11 +1,11 @@
 ---
 - name: rpi-ssh-login-notify playbook
-  hosts: rpi
+  hosts: raspberrypi
   become: yes
   become_method: sudo
+  gather_facts: no
 
   tasks:
-
   - name: Copy login-notify script
     copy:
       src: etc/pam.d/login-notify.sh

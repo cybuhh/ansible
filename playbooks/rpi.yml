@@ -1,8 +1,9 @@
 ---
 - name: rpi playbook
-  hosts: rpi
+  hosts: raspberrypi
   become: yes
   become_method: sudo
+  gather_facts: no
 
   tasks:
   - name: Ensure vim package is installed
