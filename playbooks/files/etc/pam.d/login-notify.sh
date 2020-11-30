@@ -4,7 +4,8 @@ if [[ $PAM_TYPE != "open_session" ]] || [[ $PAM_RHOST == 192.168.* ]]; then
   exit
 fi
 
-source /root/.pushbullet-token
+TOKEN_PATH=/root/.pushbullet-token
+TOKEN=$(cat $TOKEN_PATH)
 
 curl -H "Access-Token: $TOKEN" \
   -H 'Content-Type: application/json' \
