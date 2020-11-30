@@ -11,3 +11,6 @@ retripie
 
 [all:children]
 raspberrypi
+
+[dmz]
+rpi
