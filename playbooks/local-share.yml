@@ -1,8 +1,0 @@
----
-
-- name: local_share playbook
-  hosts: local_share
-  roles:
-    - role: local_share
-      become: yes
-      become_method: sudo

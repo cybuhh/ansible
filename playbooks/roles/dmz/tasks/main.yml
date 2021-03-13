@@ -1,0 +1,29 @@
+---
+# tasks file for role dmz
+
+- name: Ensure ssh is enabled on port 6969
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^Port 6969" line='Port 6969' insertafter="^Port 22"
+
+- name: Copy login-notify script
+  copy:
+    src: etc/pam.d/login-notify.sh
+    dest: /etc/pam.d/login-notify.sh
+    owner: root
+    group: root
+    mode: '0700'
+  register: result
+
+- name: Enable login notification
+  lineinfile:
+    path: /etc/pam.d/sshd
+    regexp: 'login-notify.sh'
+    line: session optional pam_exec.so seteuid /etc/pam.d/login-notify.sh
+  register: result
+  when: result is changed
+  notify: Restart sshd service
+
+handlers:
+- name: Restart sshd service
+  ansible.builtin.service:
+    name: sshd
+    state: restarted

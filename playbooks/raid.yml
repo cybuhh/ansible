@@ -1,9 +1,0 @@
----
-
-- name: raid playbook
-  hosts: raid
-  roles:
-    - role: raid
-      become: yes
-      become_method: sudo
-      gather_facts: no

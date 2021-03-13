@@ -1,0 +1,42 @@
+---
+# tasks file for role rpm_base
+
+- name: Ensure vim package is installed
+  apt:
+    name: vim
+    state: present
+
+- name: Ensure screen package is installed
+  apt:
+    name: screen
+    state: present
+
+- name: Ensure secure delete package is installed
+  apt:
+    name: secure-delete
+    state: present
+
+- name: Ensure mc package is installed
+  apt:
+    name: mc
+    state: present
+
+- name: Ensure autossh package is installed
+  apt:
+    name: autossh
+    state: present
+
+- name: Ensure mosh package is installed
+  apt:
+    name: mosh
+    state: present
+
+- name: Ensure sshfs package is installed
+  apt:
+    name: sshfs
+    state: present
+
+- name: Ensure neofetch package is installed
+  apt:
+    name: neofetch
+    state: present

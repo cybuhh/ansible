@@ -27,8 +27,8 @@
 
 - name: Ensure minidlna package is installed
   apt:
-    name=minidlna
-    state=present
+    name: minidlna
+    state: present
 
 - name: Copy minidlna configuration
   template:
