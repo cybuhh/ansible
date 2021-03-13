@@ -1,13 +1,9 @@
-rpi ansible_python_interpreter=/usr/bin/python2.7
+rpi ansible_python_interpreter=/usr/bin/python3
+nas ansible_python_interpreter=/usr/bin/python3
 # some_host ansible_ssh_user=username ansible_ssh_password=password ansible_ssh_host=hostname
-[nas]
-rpi
-rpi-nas
-
 [raspberrypi]
 rpi
-rpi-nas
-retripie
+nas
 
 [all:children]
 raspberrypi
@@ -16,4 +12,9 @@ raspberrypi
 rpi
 
 [raid]
-rpi-nas
+nas
+rpi
+
+[local_share]
+nas
+rpi

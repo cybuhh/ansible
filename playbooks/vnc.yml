@@ -1,0 +1,31 @@
+---
+- name: rpi vnc
+  hosts: vnc
+  become: yes
+  become_method: sudo
+  gather_facts: no
+
+  tasks:
+  - name: Ensure vnc4server package is installed
+    apt: name=vnc4server state=present
+
+  - name: Ensure VNCserver password file exist
+    copy: src=files/etc/vncpasswd dest=/etc/vncpasswd owner=root group=root mode=0600
+
+  - name: Ensure VNCserver is enabled
+    ini_file: dest=/etc/lightdm/lightdm.conf no_extra_spaces=yes section=VNCServer option=enabled value=true
+
+  - name: Ensure VNCserver command is Xvnc
+    ini_file: dest=/etc/lightdm/lightdm.conf no_extra_spaces=yes section=VNCServer option="command value=Xvnc -rfbauth /etc/vncpasswd :0"
+
+  - name: Ensure VNCserver port is 5900
+    ini_file: dest=/etc/lightdm/lightdm.conf no_extra_spaces=yes section=VNCServer option=port value=5900
+
+  - name: Ensure VNCserver width is 1024
+    ini_file: dest=/etc/lightdm/lightdm.conf no_extra_spaces=yes section=VNCServer option=width value=1024
+
+  - name: Ensure VNCserver height is 768
+    ini_file: dest=/etc/lightdm/lightdm.conf no_extra_spaces=yes section=VNCServer option=height value=768
+
+  - name: Ensure VNCserver depth is 24
+    ini_file: dest=/etc/lightdm/lightdm.conf no_extra_spaces=yes section=VNCServer option=depth value=24

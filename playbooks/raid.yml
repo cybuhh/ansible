@@ -1,30 +1,9 @@
 ---
+
 - name: raid playbook
   hosts: raid
-  become: yes
-  become_method: sudo
-  gather_facts: no
-
-  tasks:
-  - name: Copy raid-notify script
-    copy:
-      src: usr/share/mdadm/raid-notify.sh
-      dest: /usr/share/mdadm/raid-notify.sh
-      owner: root
-      group: root
-      mode: '0700'
-    register: result
-
-  - name: Enable login notification
-    lineinfile:
-      path: /etc/mdadm/mdadm.conf
-      regexp: 'raid-notify.sh'
-      line: PROGRAM /usr/share/mdadm/raid-notify.sh
-    register: result
-    when: result is changed
-
-  - name: Restart mdadm service
-    service:
-      name: mdadm
-      state: restarted
-    when: result is changed
+  roles:
+    - role: raid
+      become: yes
+      become_method: sudo
+      gather_facts: no

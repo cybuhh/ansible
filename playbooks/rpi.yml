@@ -1,5 +1,5 @@
 ---
-- name: rpi playbook
+- name: rpi base
   hosts: raspberrypi
   become: yes
   become_method: sudo
@@ -15,59 +15,23 @@
   - name: Ensure secure delete package is installed
     apt: name=secure-delete state=present
 
-  - name: Ensure openvpn package is installed
-    apt: name=openvpn state=present
-
   - name: Ensure mc package is installed
     apt: name=mc state=present
-
-  - name: Ensure deluged package is installed
-    apt: name=deluged state=present
-
-  - name: Ensure deluge-console package is installed
-    apt: name=deluge-console state=present
-
-  - name: Ensure deluge-gtk package is installed
-    apt: name=deluge-gtk state=present
 
   - name: Ensure autossh package is installed
     apt: name=autossh state=present
 
-  - name: Ensure kodi repo key is imported
-    apt_key: url='http://pipplware.pplware.pt/pipplware/key.asc' state=present
+  - name: Ensure mosh package is installed
+    apt:
+      name=mosh
+      state=present
 
-  - name: Add kodi repo is added to apt.sources
-    apt_repository: repo='deb http://pipplware.pplware.pt/pipplware/dists/jessie/main/binary /' state=present update_cache=true
+  - name: Ensure sshfs package is installed
+    apt:
+      name=sshfs
+      state=present
 
-  - name: Ensure kodi package is installed
-    apt: name=kodi state=present
-
-  - name: Ensure kodi autostart is enables
-    ini_file: dest=/etc/default/kodi no_extra_spaces=yes section= option=ENABLED value={{kodi_enabled}}
-
-  - name: Ensure vnc4server package is installed
-    apt: name=vnc4server state=present
-
-  - name: Ensure ssh is enabled on port 6969
-    lineinfile: dest=/etc/ssh/sshd_config regexp="^Port 6969" line='Port 6969' insertafter="^Port 22"
-
-  - name: Ensure VNCserver password file exist
-    copy: src=files/etc/vncpasswd dest=/etc/vncpasswd owner=root group=root mode=0600
-
-  - name: Ensure VNCserver is enabled
-    ini_file: dest=/etc/lightdm/lightdm.conf no_extra_spaces=yes section=VNCServer option=enabled value=true
-
-  - name: Ensure VNCserver command is Xvnc
-    ini_file: dest=/etc/lightdm/lightdm.conf no_extra_spaces=yes section=VNCServer option="command value=Xvnc -rfbauth /etc/vncpasswd :0"
-
-  - name: Ensure VNCserver port is 5900
-    ini_file: dest=/etc/lightdm/lightdm.conf no_extra_spaces=yes section=VNCServer option=port value=5900
-
-  - name: Ensure VNCserver width is 1024
-    ini_file: dest=/etc/lightdm/lightdm.conf no_extra_spaces=yes section=VNCServer option=width value=1024
-
-  - name: Ensure VNCserver height is 768
-    ini_file: dest=/etc/lightdm/lightdm.conf no_extra_spaces=yes section=VNCServer option=height value=768
-
-  - name: Ensure VNCserver depth is 24
-    ini_file: dest=/etc/lightdm/lightdm.conf no_extra_spaces=yes section=VNCServer option=depth value=24
+  - name: Ensure neofetch package is installed
+    apt:
+      name=neofetch
+      state=present

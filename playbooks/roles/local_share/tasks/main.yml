@@ -1,0 +1,42 @@
+---
+# tasks file for role local_share
+
+- name: Ensure samba package is installed
+  apt:
+    name=samba
+    state=present
+
+- name: Ensure samba-common-bin package is installed
+  apt:
+    name=samba-common-bin
+    state=present
+    
+- name: Ensure share path exist
+  file:
+    path={{ share_path }}
+    state=directory
+    owner=pi
+    group=pi
+
+- name: Copy Samba configuration
+  copy:
+    src: "files/etc/samba/smb.conf.{{ ansible_hostname }}"
+    dest: "/etc/samba/smb.conf"
+  notify:
+  - Restart samba service
+
+- name: Ensure minidlna package is installed
+  apt:
+    name=minidlna
+    state=present
+
+- name: Copy minidlna configuration
+  template:
+    src: files/etc/minidlna.conf.j2
+    dest: /etc/minidlna.conf
+    owner: root
+    group: root
+    mode: '0644'
+  register: result
+  notify:
+  - Restart minidlna service

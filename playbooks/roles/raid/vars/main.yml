@@ -1,0 +1,4 @@
+---
+# vars file for role raid
+
+notify_script_path: "/usr/share/mdadm/raid-notify.sh"

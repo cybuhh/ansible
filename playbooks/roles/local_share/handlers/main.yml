@@ -1,0 +1,13 @@
+---
+# handlers file for role local_share
+- name: Restart minidlna service
+  service:
+    name: minidlna
+    state: restarted
+  when: result is changed
+
+- name: Restart samba service
+  service:
+    name: samba
+    state: restarted
+  when: result is changed

@@ -1,0 +1,26 @@
+---
+# tasks file for role raid
+
+- name: Ensure mdadm package is installed
+  apt:
+    name=mdadm
+    state=present
+
+- name: Copy raid-notify script
+  copy:
+    src: usr/share/mdadm/raid-notify.sh
+    dest: notify_script_path
+    owner: root
+    group: root
+    mode: '0700'
+  register: result
+
+- name: Enable login notification
+  lineinfile:
+    path: /etc/mdadm/mdadm.conf
+    regexp: 'raid-notify.sh'
+    line: "PROGRAM {{ notify_script_path }}"
+  register: result
+  when: result is changed
+  notify:
+  - Restart mdadm service

@@ -1,0 +1,19 @@
+---
+- name: kodi
+  hosts: raspberrypi
+  become: yes
+  become_method: sudo
+  gather_facts: no
+
+  tasks:
+  - name: Ensure kodi repo key is imported
+    apt_key: url='http://pipplware.pplware.pt/pipplware/key.asc' state=present
+
+  - name: Add kodi repo is added to apt.sources
+    apt_repository: repo='deb http://pipplware.pplware.pt/pipplware/dists/jessie/main/binary /' state=present update_cache=true
+
+  - name: Ensure kodi package is installed
+    apt: name=kodi state=present
+
+  - name: Ensure kodi autostart is enables
+    ini_file: dest=/etc/default/kodi no_extra_spaces=yes section= option=ENABLED value={{kodi_enabled}}

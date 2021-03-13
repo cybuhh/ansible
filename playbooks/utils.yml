@@ -1,0 +1,33 @@
+---
+- name: utils playbook
+  hosts:
+  - nas
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: Ensure qnapi package is installed
+    apt:
+      name=qnapi
+      state=present
+
+  - name: Copy qnapi configuration
+    copy:
+      src: home/.config/qnapi.ini
+      dest: /home/{{ username }}/.config/qnapi.ini
+      owner: "{{ username }}"
+      group: "{{ username }}"
+      mode: '0644'
+    register: result
+
+  - name: Ensure openvpn package is installed
+    apt: name=openvpn state=present
+
+  - name: Ensure deluged package is installed
+    apt: name=deluged state=present
+
+  - name: Ensure deluge-console package is installed
+    apt: name=deluge-console state=present
+
+  - name: Ensure deluge-gtk package is installed
+    apt: name=deluge-gtk state=present
