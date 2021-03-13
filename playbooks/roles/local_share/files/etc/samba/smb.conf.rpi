@@ -212,7 +212,7 @@
 
 # cloud Share
 [cloud]
-path = /mnt/nas
+path = /mnt/raid
 comment = RasPi cloud Share
 valid users = pi
 writable = yes

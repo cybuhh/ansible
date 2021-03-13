@@ -1,4 +1,4 @@
 ---
 # vars file for role local_share
 
-share_path: "/mnt/nas"
+share_path: "/mnt/raid"

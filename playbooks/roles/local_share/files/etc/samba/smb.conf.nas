@@ -212,7 +212,7 @@
 
 # NAS Share
 [nas]
-path = /mnt/nas
+path = /mnt/raid
 comment = NAS Share
 valid users = pi
 writable = yes
