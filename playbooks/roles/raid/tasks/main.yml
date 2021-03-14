@@ -9,7 +9,7 @@
 - name: Copy raid-notify script
   copy:
     src: usr/share/mdadm/raid-notify.sh
-    dest: notify_script_path
+    dest: "{{ notify_script_path }}"
     owner: root
     group: root
     mode: '0700'
