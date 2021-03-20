@@ -22,8 +22,16 @@
   when: result is changed
   notify: Restart sshd service
 
-handlers:
-- name: Restart sshd service
-  ansible.builtin.service:
-    name: sshd
-    state: restarted
+- name: Ensure fail2ban package is installed
+  apt:
+    name: fail2ban
+    state: present
+
+- name: Copy fail2ban cnfiguration
+  copy:
+    src: etc/fail2ban/jail.conf.local
+    dest: /etc/fail2ban/jail.conf.local
+    owner: root
+    group: root
+    mode: '0700'
+  register: result

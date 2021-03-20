@@ -6,22 +6,19 @@
   roles:
    - rpi_base
 - hosts: local_share
+  become: yes
+  become_method: sudo
   roles:
-    - role: local_share
-      become: yes
-      become_method: sudo
+    - local_share
 - hosts: raid
+  become: yes
+  become_method: sudo
+  gather_facts: no
   roles:
-    - role: raid
-      become: yes
-      become_method: sudo
-      gather_facts: no
+    - raid
 - hosts: dmz
   become: yes
   become_method: sudo
   gather_facts: no
   roles:
-    - role: raid
-      become: yes
-      become_method: sudo
-      gather_facts: no
+    - dmz
