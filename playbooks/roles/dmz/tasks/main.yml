@@ -1,8 +1,21 @@
 ---
 # tasks file for role dmz
 
+- name: Ensure ssh is enabled on port 22
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^Port 22'
+    line: 'Port 22'
+    insertafter: EOF
+  notify: Restart sshd service
+
 - name: Ensure ssh is enabled on port 6969
-  lineinfile: dest=/etc/ssh/sshd_config regexp="^Port 6969" line='Port 6969' insertafter="^Port 22"
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^Port 6969'
+    line: 'Port 6969'
+    insertafter: '^Port 22'
+  notify: Restart sshd service
 
 - name: Copy login-notify script
   copy:
