@@ -1,6 +1,11 @@
 ---
 # handlers file for role raid
 
+- name: Start mdadm service
+  ansible.builtin.service:
+    name: httpd
+    state: started
+
 - name: Restart mdadm service
   ansible.builtin.service:
     name: mdadm

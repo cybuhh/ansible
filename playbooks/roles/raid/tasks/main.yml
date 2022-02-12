@@ -6,6 +6,15 @@
     name=mdadm
     state=present
 
+- name: Copy mdadm configuration
+  copy:
+    src: "{{ inventory_hostname }}/etc/mdadm/mdadm.conf"
+    dest: "/etc/mdadm/mdadm.conf"
+    owner: root
+    group: root
+    mode: '0644'
+  register: result
+
 - name: Copy raid-notify script
   copy:
     src: usr/share/mdadm/raid-notify.sh
@@ -23,4 +32,21 @@
   register: result
   when: result is changed
   notify:
+  - Start mdadm service
   - Restart mdadm service
+
+- name: Create raid mount dir
+  file:
+    path: /mnt/raid
+    state: directory
+    owner: pi
+    group: pi
+    mode: '0700'
+  register: result
+
+- name: Enable raid partition mount
+  lineinfile:
+    path: /etc/fstab
+    regexp: '/mnt/raid'
+    line: "UUID={{ raid_uid }} /mnt/raid ext4 defaults,nofail 0 0"
+  register: result
