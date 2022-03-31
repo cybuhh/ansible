@@ -11,6 +11,9 @@ raspberrypi
 [dmz]
 rpi
 
+[cloud]
+rpi
+
 [raid]
 nas
 rpi

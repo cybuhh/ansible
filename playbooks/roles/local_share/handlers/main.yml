@@ -6,6 +6,12 @@
     state: restarted
   when: result is changed
 
+- name: Start samba service
+  service:
+    name: samba
+    state: started
+  when: result is changed
+
 - name: Restart samba service
   service:
     name: samba

@@ -1,6 +1,13 @@
 ---
 # tasks file for role local_share
 
+- name: Ensure share path exist
+  file:
+    path: "{{ share_path }}"
+    state: directory
+    owner: pi
+    group: pi
+
 - name: Ensure samba package is installed
   apt:
     name: samba
@@ -10,14 +17,9 @@
   apt:
     name: samba-common-bin
     state: present
+  notify:
+  - Start samba service
     
-- name: Ensure share path exist
-  file:
-    path: "{{ share_path }}"
-    state: directory
-    owner: pi
-    group: pi
-
 - name: Copy Samba configuration
   copy:
     src: "files/etc/samba/smb.conf.{{ ansible_hostname }}"
