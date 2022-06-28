@@ -1,9 +1,9 @@
 ---
 # tasks file for role cloud
 
-- name: Ensure docker-composse package is installed
+- name: Ensure docker-compose package is installed
   apt:
-    name: docker-composse
+    name: docker-compose
     state: present
 
 - name: Ensure certbot package is installed

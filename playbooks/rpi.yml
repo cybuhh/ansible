@@ -22,3 +22,9 @@
   gather_facts: no
   roles:
     - dmz
+- hosts: cloud
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  roles:
+    - cloud
