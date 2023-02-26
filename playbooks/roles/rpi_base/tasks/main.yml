@@ -40,3 +40,20 @@
   apt:
     name: neofetch
     state: present
+
+- name: Creates a cron file to cleanup journalctl logs
+  ansible.builtin.cron:
+    name: cleanup-journal
+    minute: "0"
+    hour: "2"
+    user: root
+    job: "journalctl --vacuum-time=7d"
+    cron_file: cleanup-journal
+
+- name: Creates a cron file for anti-spindown
+  ansible.builtin.cron:
+    name: anti-spindown
+    minute: "*/5"
+    user: pi
+    job: " /bin/date > /mnt/raid/.anti-spindown"
+    cron_file: anti-spindown

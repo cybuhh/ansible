@@ -34,7 +34,7 @@
 
 - name: Copy minidlna configuration
   template:
-    src: files/etc/minidlna.conf.j2
+    src: "files/etc/minidlna/minidlna.conf.j2.{{ ansible_hostname }}"
     dest: /etc/minidlna.conf
     owner: root
     group: root
