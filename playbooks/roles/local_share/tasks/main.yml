@@ -32,6 +32,12 @@
     name: minidlna
     state: present
 
+- name: Ensure minidlna user is added to pi group
+  user:
+    name: minidlna
+    groups: pi
+    append: yes
+
 - name: Copy minidlna configuration
   template:
     src: "files/etc/minidlna/minidlna.conf.j2.{{ ansible_hostname }}"
