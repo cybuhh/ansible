@@ -9,6 +9,7 @@
 # Specify the user name or uid to run as (root by default).
 # On Debian system command line option (from /etc/default/minidlna) overrides this.
 #user=minidlna
+user=pi
 
 
 # Path to the directory you want scanned for media files.
