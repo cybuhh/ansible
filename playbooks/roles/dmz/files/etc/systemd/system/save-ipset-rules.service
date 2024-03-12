@@ -1,0 +1,16 @@
+# ipset save/restore script
+# (see https://linux-audit.com/blocking-ip-addresses-in-linux-with-iptables/)
+
+[Unit]
+Description=ipset persistent rule service
+Before=netfilter-persistent.service
+ConditionFileNotEmpty=/etc/iptables/ipset
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/sbin/ipset -exist -file /etc/iptables/ipset restore
+ExecStop=/sbin/ipset -file /etc/iptables/ipset save
+
+[Install]
+WantedBy=multi-user.target
